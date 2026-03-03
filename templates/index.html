@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kileo · premium spirits</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font + Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 (minimal) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --kileo-gold: #D4AF37;
+            --kileo-glow: rgba(212, 175, 55, 0.25);
+            --kileo-dark: #0a0a0a;
+            --kileo-card-bg: #131313;
+            --kileo-card-border: #2a2a2a;
+            --kileo-text-dim: #a8a8a8;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: radial-gradient(circle at 30% 10%, #1a1a1a, #030303);
+            color: #f0f0f0;
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ---------- modern glass navbar ---------- */
+        .navbar-modern {
+            background: rgba(8, 8, 8, 0.8) !important;
+            backdrop-filter: blur(18px) saturate(180%);
+            -webkit-backdrop-filter: blur(18px) saturate(180%);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+            padding: 14px 0;
+            transition: all 0.2s;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            letter-spacing: 4px;
+            font-size: 1.6rem;
+            background: linear-gradient(135deg, #f5e07c, #d4a017);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent !important;
+            text-shadow: 0 0 10px #d4af3740;
+        }
+
+        .nav-link-custom {
+            color: #ddd !important;
+            font-weight: 500;
+            padding: 0.5rem 1.2rem !important;
+            border-radius: 40px;
+            transition: 0.2s;
+            font-size: 1rem;
+            margin: 0 0.2rem;
+            text-decoration: none;
+        }
+
+        .nav-link-custom i {
+            margin-right: 6px;
+            font-size: 0.9rem;
+            color: var(--kileo-gold);
+        }
+
+        .nav-link-custom:hover {
+            color: white !important;
+            background: rgba(212, 175, 55, 0.08);
+        }
+
+        /* contact chip with interactive reveal */
+        .contact-chip {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 40px;
+            padding: 0.35rem 0.8rem 0.35rem 1.2rem;
+            margin-left: 0.5rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            white-space: nowrap;
+            color: #f5e7b0;
+        }
+
+        .contact-chip i {
+            font-size: 0.9rem;
+            margin-right: 6px;
+            color: var(--kileo-gold);
+        }
+
+        .contact-chip span.hidden-number {
+            max-width: 0;
+            opacity: 0;
+            transition: 0.25s ease-in-out;
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-chip:hover span.hidden-number {
+            max-width: 160px;
+            opacity: 1;
+            margin-left: 6px;
+            color: #fff;
+        }
+
+        .contact-chip:hover {
+            background: rgba(212, 175, 55, 0.25);
+            border-color: #d4af37;
+            padding-right: 1.2rem;
+        }
+
+        /* ---------- hero with search ---------- */
+        .hero-section {
+            padding: 90px 0 50px 0;
+            text-align: center;
+            background: radial-gradient(ellipse at 70% 30%, rgba(212, 175, 55, 0.05), transparent 60%);
+        }
+
+        .hero-section h1 {
+            font-weight: 800;
+            font-size: 3.3rem;
+            background: linear-gradient(145deg, #ffffff, #d4af37);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .hero-section .lead {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #c0c0c0;
+            max-width: 580px;
+            margin: 0 auto 2rem auto;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            display: inline-block;
+            padding-bottom: 1rem;
+        }
+
+        /* search bar - gold accent */
+        .search-wrapper {
+            max-width: 550px;
+            margin: 2rem auto 0;
+            position: relative;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--kileo-gold);
+            font-size: 1.1rem;
+            z-index: 4;
+        }
+
+        #searchInput {
+            background: rgba(20, 20, 20, 0.9);
+            border: 1px solid #3a3a3a;
+            border-radius: 60px;
+            height: 60px;
+            padding: 0 30px 0 55px;
+            font-size: 1.1rem;
+            color: white;
+            width: 100%;
+            backdrop-filter: blur(8px);
+            transition: 0.3s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+        }
+
+        #searchInput:focus {
+            outline: none;
+            border-color: var(--kileo-gold);
+            box-shadow: 0 0 20px rgba(212,175,55,0.3);
+            background: #1e1e1e;
+        }
+
+        #searchInput::placeholder {
+            color: #aaa;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+        }
+
+        .reset-search {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: none;
+        }
+
+        .reset-search:hover {
+            color: var(--kileo-gold);
+        }
+
+        /* ---------- product cards (elevated, modern) ---------- */
+        .product-grid {
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: var(--kileo-card-bg);
+            border: 1px solid var(--kileo-card-border);
+            border-radius: 32px;
+            transition: all 0.35s cubic-bezier(0.2, 0, 0, 1);
+            overflow: hidden;
+            height: 100%;
+            backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.6);
+        }
+
+        .product-card:hover {
+            border-color: var(--kileo-gold);
+            transform: translateY(-10px) scale(1.01);
+            box-shadow: 0 30px 50px -15px rgba(212, 175, 55, 0.3);
+        }
+
+        .img-wrapper {
+            background: #f8f8f8; /* clean white background for bottles */
+            padding: 30px 20px;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            border-bottom: 2px solid #1e1e1e;
+        }
+
+        .product-card:hover .img-wrapper {
+            transform: scale(1.02);
+        }
+
+        .product-img {
+            max-height: 100%;
+            max-width: 85%;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.3));
+            transition: 0.2s;
+        }
+
+        .product-card:hover .product-img {
+            filter: drop-shadow(0 12px 16px rgba(212, 175, 55, 0.3));
+        }
+
+        .card-content {
+            padding: 1.8rem 1.5rem 1.8rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            background: #121212;
+        }
+
+        .category-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .category-tag {
+            color: var(--kileo-gold);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 2px;
+            background: rgba(212, 175, 55, 0.08);
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .unit-badge {
+            background: #262626;
+            color: #bbb;
+            font-size: 0.7rem;
+            padding: 0.3rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 500;
+            border: 1px solid #333;
+        }
+
+        .product-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0.5rem 0 0.3rem;
+            line-height: 1.3;
+            letter-spacing: -0.3px;
+        }
+
+        .price-container {
+            margin-top: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-label {
+            font-size: 0.8rem;
+            color: #999;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .price-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--kileo-gold);
+            line-height: 1;
+        }
+
+        .price-value small {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #aaa;
+        }
+
+        /* stock indicator modern */
+        .stock-pill {
+            font-size: 0.8rem;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            display: inline-flex;
+            align-items: center;
+            width: fit-content;
+            background: #1c1c1c;
+            border: 1px solid #2c2c2c;
+        }
+
+        .stock-pill i {
+            font-size: 0.6rem;
+            margin-right: 8px;
+        }
+
+        .in-stock {
+            color: #6fda6f;
+        }
+        .low-stock {
+            color: #f3b35e;
+        }
+        .out-stock {
+            color: #f57a7a;
+        }
+
+        /* no products message */
+        .no-products-msg {
+            text-align: center;
+            padding: 60px 20px;
+            color: #aaa;
+            font-size: 1.2rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: 60px;
+            margin-top: 30px;
+            border: 1px dashed #333;
+        }
+
+        /* subtle footer */
+        .modern-footer {
+            padding: 35px 0;
+            margin-top: 70px;
+            border-top: 1px solid rgba(212,175,55,0.1);
+            color: #777;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-align: center;
+            background: rgba(0,0,0,0.4);
+        }
+
+        .modern-footer i {
+            color: var(--kileo-gold);
+            margin: 0 6px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ================= MODERN NAVBAR ================= -->
+<nav class="navbar navbar-dark navbar-modern sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="#"><i class="fas fa-crown me-2" style="font-size: 1.2rem; color: #D4AF37;"></i>KILEO</a>
+
+        <div class="d-flex align-items-center">
+            <a href="#" class="nav-link-custom"><i class="fas fa-store"></i> Shop</a>
+            <!-- contact chip with hidden number on hover -->
+            <div class="contact-chip" title="hover to reveal">
+                <i class="fas fa-phone-alt"></i>
+                <span class="hidden-number">+254 742 496 307</span>
+                <span style="margin-left: 4px; font-size:0.85rem;">📞</span>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- ================= HERO WITH SEARCH ================= -->
+<section class="hero-section">
+    <div class="container">
+        <h1>DECANTER OF EXCELLENCE</h1>
+        <div class="lead">curated luxury · international spirits</div>
+
+        <!-- SEARCH BAR -->
+        <div class="search-wrapper">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="searchInput" placeholder="Search by name, category, or spirit...">
+            <button class="reset-search" id="resetSearchBtn" onclick="clearSearch()"><i class="fas fa-times-circle"></i></button>
+        </div>
+        <div style="margin-top: 1.2rem;">
+            <span class="badge bg-dark text-white px-3 py-2 rounded-pill border border-warning"><i class="fas fa-check-circle text-warning me-2"></i>express delivery</span>
+        </div>
+    </div>
+</section>
+
+<!-- ================= PRODUCT GRID (dynamic with search) ================= -->
+<div class="container product-grid pb-5">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="productContainer">
+        <!--
+            JINJA LOOP preserved exactly – will render products from backend.
+            For preview/demo fallback we also include sample products with data attributes.
+            In real backend, these get replaced. We'll add a second set with js but keep the loop.
+        -->
+        {% for product in products %}
+        <div class="col product-item" data-name="{{ product.name|lower }}" data-category="{{ product.category|lower }}" data-unit="{{ product.productunit|lower }}">
+            <div class="product-card">
+                <div class="img-wrapper">
+                    <img src="{{ product.productImage }}" class="product-img" alt="{{ product.name }}">
+                </div>
+                <div class="card-content">
+                    <div class="category-line">
+                        <span class="category-tag">{{ product.category }}</span>
+                        <span class="unit-badge">{{ product.productunit }}</span>
+                    </div>
+                    <h5 class="product-title">{{ product.name }}</h5>
+                    <div class="price-container">
+                        <div class="price-label">Retail price</div>
+                        <div class="price-value">Ksh {{ "{:,.0f}".format(product.price) }}</div>
+                    </div>
+                    <div class="stock-pill mt-2
+                        {% if product.quantityInStock > 5 %}in-stock{% elif product.quantityInStock > 0 %}low-stock{% else %}out-stock{% endif %}">
+                        {% if product.quantityInStock > 5 %}
+                            <i class="fas fa-circle" style="color: #6fda6f;"></i> In stock
+                        {% elif product.quantityInStock > 0 %}
+                            <i class="fas fa-exclamation-triangle" style="color: #f3b35e;"></i> Only {{ product.quantityInStock }} left
+                        {% else %}
+                            <i class="fas fa-times-circle" style="color: #f57a7a;"></i> Out of stock
+                        {% endif %}
+                    </div>
+                    <div class="mt-4 d-flex justify-content-end">
+                        <span class="btn-gold d-inline-block px-4 py-2 rounded-pill fw-semibold" style="background: #D4AF37; color: #000;"><i class="fas fa-shopping-bag me-2"></i>inquire</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- No products message (hidden by default) -->
+    <div id="noProductsMessage" class="no-products-msg" style="display: none;">
+        <i class="fas fa-wine-bottle me-2"></i> no spirits match your search <i class="fas fa-wine-bottle ms-2"></i>
+    </div>
+</div>
+
+<!-- ================= MODERN FOOTER ================= -->
+<footer class="modern-footer">
+    <div class="container">
+        <i class="fas fa-wine-bottle me-2"></i> KILEO PREMIUM SPIRITS <i class="fas fa-wine-bottle ms-2"></i><br>
+        <span class="small">© 2026 · aged to perfection · <span style="color:#b59440;">+254 742 496 307</span></span>
+    </div>
+</footer>
+
+<!-- Search functionality + fallback sample products for demo (since Jinja may be empty in preview) -->
+<script>
+    (function() {
+        // Ensure contact chip also works on click (optional)
+        const chip = document.querySelector('.contact-chip');
+        if(chip) {
+            chip.addEventListener('click', function(e) {
+                e.preventDefault();
+                const hiddenSpan = chip.querySelector('.hidden-number');
+                hiddenSpan.style.opacity = '1';
+                hiddenSpan.style.maxWidth = '160px';
+                hiddenSpan.style.marginLeft = '6px';
+                setTimeout(() => {
+                    // only if not hovering? we keep it clean
+                }, 2000);
+            });
+        }
+
+        // ---------- SEARCH IMPLEMENTATION ----------
+        const searchInput = document.getElementById('searchInput');
+        const resetBtn = document.getElementById('resetSearchBtn');
+        const productContainer = document.getElementById('productContainer');
+        const noProductsMsg = document.getElementById('noProductsMessage');
+
+        // FALLBACK: if no dynamic products (pure HTML preview), inject sample products
+        // We detect if container has .product-item children (from Jinja). If zero, we add our demo set.
+        function ensureSampleProducts() {
+            if (productContainer.children.length === 0 ||
+                (productContainer.children.length === 1 && productContainer.children[0].tagName === '!--')) {
+                // No real products, inject samples with data attributes
+                const samples = [
+                    { name: 'McAllen 18 YO', category: 'Whisky', unit: '700 ml', price: '15,200', stock: 7, img: 'https://images.unsplash.com/photo-1584225064785-c62a8b43d148?w=400&auto=format' },
+                    { name: 'Belvedere Intense', category: 'Vodka', unit: '1 L', price: '6,800', stock: 3, img: 'https://images.unsplash.com/photo-1609348955036-7bbff577d59e?w=400&auto=format' },
+                    { name: 'Monkey 47', category: 'Gin', unit: '750 ml', price: '9,450', stock: 0, img: 'https://images.unsplash.com/photo-1614315117760-6f0e09434d8c?w=400&auto=format' },
+                    { name: 'Hennessy X.O', category: 'Cognac', unit: '700 ml', price: '32,500', stock: 5, img: 'https://images.unsplash.com/photo-1582813760691-69c1a5f325c7?w=400&auto=format' },
+                    { name: 'Grey Goose', category: 'Vodka', unit: '1 L', price: '7,200', stock: 12, img: 'https://images.unsplash.com/photo-1615996001375-c98ef982c7e9?w=400&auto=format' },
+                    { name: 'Johnnie Walker Blue', category: 'Whisky', unit: '700 ml', price: '38,000', stock: 2, img: 'https://images.unsplash.com/photo-1603989976169-53b5851a2ce7?w=400&auto=format' },
+                ];
+
+                productContainer.innerHTML = ''; // clear any empty comment
+                samples.forEach(s => {
+                    const stockClass = s.stock > 5 ? 'in-stock' : (s.stock > 0 ? 'low-stock' : 'out-stock');
+                    let stockIcon = '';
+                    let stockText = '';
+                    if (s.stock > 5) { stockIcon = '<i class="fas fa-circle" style="color: #6fda6f;"></i> In stock'; }
+                    else if (s.stock > 0) { stockIcon = `<i class="fas fa-exclamation-triangle" style="color: #f3b35e;"></i> Only ${s.stock} left`; }
+                    else { stockIcon = '<i class="fas fa-times-circle" style="color: #f57a7a;"></i> Out of stock'; }
+
+                    const col = document.createElement('div');
+                    col.className = 'col product-item';
+                    col.setAttribute('data-name', s.name.toLowerCase());
+                    col.setAttribute('data-category', s.category.toLowerCase());
+                    col.setAttribute('data-unit', s.unit.toLowerCase());
+                    col.innerHTML = `
+                        <div class="product-card">
+                            <div class="img-wrapper"><img src="${s.img}" class="product-img" alt="${s.name}"></div>
+                            <div class="card-content">
+                                <div class="category-line"><span class="category-tag">${s.category}</span><span class="unit-badge">${s.unit}</span></div>
+                                <h5 class="product-title">${s.name}</h5>
+                                <div class="price-container"><div class="price-label">Retail price</div><div class="price-value">Ksh ${s.price}</div></div>
+                                <div class="stock-pill mt-2 ${stockClass}">${stockIcon}</div>
+                                <div class="mt-4 d-flex justify-content-end"><span class="btn-gold d-inline-block px-4 py-2 rounded-pill fw-semibold" style="background: #D4AF37; color: #000;"><i class="fas fa-shopping-bag me-2"></i>inquire</span></div>
+                            </div>
+                        </div>
+                    `;
+                    productContainer.appendChild(col);
+                });
+            }
+        }
+
+        // run fallback
+        ensureSampleProducts();
+
+        // Search function
+        function filterProducts() {
+            const query = searchInput.value.trim().toLowerCase();
+            const items = document.querySelectorAll('.product-item');
+            let visibleCount = 0;
+
+            items.forEach(item => {
+                const name = item.getAttribute('data-name') || '';
+                const category = item.getAttribute('data-category') || '';
+                const unit = item.getAttribute('data-unit') || '';
+                // combine fields for search
+                const searchable = (name + ' ' + category + ' ' + unit).toLowerCase();
+                if (searchable.includes(query) || query === '') {
+                    item.style.display = '';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            // show/hide no products message
+            if (visibleCount === 0) {
+                noProductsMsg.style.display = 'block';
+            } else {
+                noProductsMsg.style.display = 'none';
+            }
+
+            // show reset button if query not empty
+            if (query.length > 0) {
+                resetBtn.style.display = 'block';
+            } else {
+                resetBtn.style.display = 'none';
+            }
+        }
+
+        window.clearSearch = function() {
+            searchInput.value = '';
+            filterProducts();
+            searchInput.focus();
+        };
+
+        // Event listeners
+        searchInput.addEventListener('input', filterProducts);
+        searchInput.addEventListener('keyup', filterProducts);
+
+        // initial state: hide reset
+        resetBtn.style.display = 'none';
+
+        // Ensure data attrs for jinja products: they already exist from loop.
+        // But if Jinja outputs, we need to set lowercase data attrs. we already added in loop.
+        // For demo, the fallback added them. Good.
+    })();
+</script>
+
+<!-- include small style for btn-gold (was missing) -->
+<style>
+    .btn-gold {
+        background: #D4AF37;
+        color: #000;
+        border-radius: 30px;
+        font-weight: 600;
+        padding: 10px 20px;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: default; /* not actual link */
+        opacity: 0.95;
+    }
+    .btn-gold:hover {
+        background: #f5cc5c;
+        box-shadow: 0 0 20px rgba(212,175,55,0.4);
+        transform: translateY(-2px);
+    }
+    a, .nav-link-custom { text-decoration: none; }
+</style>
+
+</body>
+</html>
