@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kileo · premium spirits · Policy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font + Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 (minimal) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --kileo-gold: #D4AF37;
+            --kileo-glow: rgba(212, 175, 55, 0.25);
+            --kileo-dark: #0a0a0a;
+            --kileo-card-bg: #131313;
+            --kileo-card-border: #2a2a2a;
+            --kileo-text-dim: #a8a8a8;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: radial-gradient(circle at 30% 10%, #1a1a1a, #030303);
+            color: #f0f0f0;
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ---------- modern glass navbar ---------- */
+        .navbar-modern {
+            background: rgba(8, 8, 8, 0.8) !important;
+            backdrop-filter: blur(18px) saturate(180%);
+            -webkit-backdrop-filter: blur(18px) saturate(180%);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+            padding: 14px 0;
+            transition: all 0.2s;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            letter-spacing: 4px;
+            font-size: 1.6rem;
+            background: linear-gradient(135deg, #f5e07c, #d4a017);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent !important;
+            text-shadow: 0 0 10px #d4af3740;
+        }
+
+        .nav-link-custom {
+            color: #ddd !important;
+            font-weight: 500;
+            padding: 0.5rem 1.2rem !important;
+            border-radius: 40px;
+            transition: 0.2s;
+            font-size: 1rem;
+            margin: 0 0.2rem;
+            text-decoration: none;
+        }
+
+        .nav-link-custom i {
+            margin-right: 6px;
+            font-size: 0.9rem;
+            color: var(--kileo-gold);
+        }
+
+        .nav-link-custom:hover {
+            color: white !important;
+            background: rgba(212, 175, 55, 0.08);
+        }
+
+        .nav-link-active {
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--kileo-gold) !important;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        /* contact chip with interactive reveal */
+        .contact-chip {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 40px;
+            padding: 0.35rem 0.8rem 0.35rem 1.2rem;
+            margin-left: 0.5rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            white-space: nowrap;
+            color: #f5e7b0;
+        }
+
+        .contact-chip i {
+            font-size: 0.9rem;
+            margin-right: 6px;
+            color: var(--kileo-gold);
+        }
+
+        .contact-chip span.hidden-number {
+            max-width: 0;
+            opacity: 0;
+            transition: 0.25s ease-in-out;
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-chip:hover span.hidden-number {
+            max-width: 160px;
+            opacity: 1;
+            margin-left: 6px;
+            color: #fff;
+        }
+
+        .contact-chip:hover {
+            background: rgba(212, 175, 55, 0.25);
+            border-color: #d4af37;
+            padding-right: 1.2rem;
+        }
+
+        /* ---------- policy hero / page header ---------- */
+        .policy-header {
+            padding: 70px 0 30px 0;
+            text-align: center;
+            background: radial-gradient(ellipse at 70% 30%, rgba(212, 175, 55, 0.05), transparent 60%);
+        }
+
+        .policy-header h1 {
+            font-weight: 800;
+            font-size: 2.8rem;
+            background: linear-gradient(145deg, #ffffff, #d4af37);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .policy-header .lead {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: #c0c0c0;
+            max-width: 650px;
+            margin: 0 auto;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            display: inline-block;
+            padding-bottom: 0.8rem;
+        }
+
+        /* policy card layout */
+        .policy-card {
+            background: var(--kileo-card-bg);
+            border: 1px solid var(--kileo-card-border);
+            border-radius: 36px;
+            backdrop-filter: blur(5px);
+            padding: 2rem 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.2s;
+            box-shadow: 0 15px 30px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .policy-card:hover {
+            border-color: var(--kileo-gold);
+            box-shadow: 0 20px 35px -12px rgba(212, 175, 55, 0.2);
+        }
+
+        .policy-icon {
+            font-size: 2.5rem;
+            color: var(--kileo-gold);
+            margin-bottom: 1.2rem;
+        }
+
+        .policy-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.3px;
+            border-left: 4px solid var(--kileo-gold);
+            padding-left: 1rem;
+        }
+
+        .policy-subtitle {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.8rem 0;
+            color: var(--kileo-gold);
+        }
+
+        .policy-text {
+            color: #cfcfcf;
+            font-weight: 400;
+            line-height: 1.65;
+            margin-bottom: 1rem;
+        }
+
+        .policy-list {
+            padding-left: 1.5rem;
+            margin-top: 0.8rem;
+        }
+        .policy-list li {
+            margin-bottom: 0.7rem;
+            color: #ddd;
+        }
+        .policy-list li i {
+            color: var(--kileo-gold);
+            margin-right: 10px;
+            font-size: 0.8rem;
+        }
+
+        .highlight-gold {
+            color: var(--kileo-gold);
+            font-weight: 600;
+        }
+
+        .divider-gold {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--kileo-gold), transparent);
+            margin: 1.5rem 0;
+            width: 100%;
+        }
+
+        .badge-policy {
+            background: rgba(212, 175, 55, 0.12);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 60px;
+            padding: 0.3rem 1.2rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* back to shop button */
+        .back-shop-btn {
+            background: transparent;
+            border: 1px solid var(--kileo-gold);
+            border-radius: 60px;
+            padding: 12px 28px;
+            color: var(--kileo-gold);
+            font-weight: 600;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .back-shop-btn:hover {
+            background: var(--kileo-gold);
+            color: #000;
+            box-shadow: 0 0 18px rgba(212,175,55,0.4);
+        }
+
+        .modern-footer {
+            padding: 35px 0;
+            margin-top: 70px;
+            border-top: 1px solid rgba(212,175,55,0.1);
+            color: #777;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-align: center;
+            background: rgba(0,0,0,0.4);
+        }
+
+        .modern-footer i {
+            color: var(--kileo-gold);
+            margin: 0 6px;
+        }
+
+        @media (max-width: 768px) {
+            .policy-header h1 { font-size: 2rem; }
+            .policy-title { font-size: 1.4rem; }
+            .policy-card { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ================= MODERN NAVBAR with POLICY TAB ================= -->
+<nav class="navbar navbar-dark navbar-modern sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="#"><i class="fas fa-crown me-2" style="font-size: 1.2rem; color: #D4AF37;"></i>KILEO</a>
+
+        <div class="d-flex align-items-center">
+            <a href="index.html" class="nav-link-custom" id="shopLink"><i class="fas fa-store"></i> Shop</a>
+            <!-- POLICY TAB - active state for this page -->
+            <a href="policy.html" class="nav-link-custom nav-link-active" id="policyLink"><i class="fas fa-file-contract"></i> Policy</a>
+            <!-- contact chip -->
+            <div class="contact-chip" title="hover to reveal">
+                <i class="fas fa-phone-alt"></i>
+                <span class="hidden-number">+254 742 496 307</span>
+                <span style="margin-left: 4px; font-size:0.85rem;">📞</span>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- ================= POLICY PAGE MAIN CONTENT ================= -->
+<section class="policy-header">
+    <div class="container">
+        <h1><i class="fas fa-scale-balanced me-3"></i> Our Commitments</h1>
+        <div class="lead">transparent policies · curated service · no hidden stock</div>
+        <div class="mt-4">
+            <span class="badge-policy"><i class="fas fa-shipping-fast me-1"></i> order-based sourcing</span>
+            <span class="badge-policy ms-2"><i class="fas fa-hand-holding-usd me-1"></i> customer-first</span>
+        </div>
+    </div>
+</section>
+
+<div class="container py-4">
+    <!-- back to shop button (optional) -->
+    <div class="mb-4">
+        <a href="index.html" class="back-shop-btn"><i class="fas fa-arrow-left"></i> Back to Shop</a>
+    </div>
+
+    <!-- ========== SHIPPING POLICY CARD ========== -->
+    <div class="policy-card">
+        <div class="policy-icon">
+            <i class="fas fa-truck-fast"></i>
+        </div>
+        <h2 class="policy-title">Shipping & Delivery Policy</h2>
+        <p class="policy-text">
+            At <strong class="highlight-gold">Kileo Premium Spirits</strong>, we operate as a curated intermediary — we do not hold stock in conventional warehouses.
+            Every bottle of wine, whisky, gin, or cognac is sourced <strong class="highlight-gold">exclusively after you place your order</strong>.
+            This ensures freshness, authenticity, and access to rare expressions without the overhead of mass inventory.
+        </p>
+
+        <div class="divider-gold"></div>
+
+        <h3 class="policy-subtitle"><i class="fas fa-clipboard-list me-2"></i> How our shipping works</h3>
+        <ul class="policy-list">
+            <li><i class="fas fa-check-circle"></i> <strong>Order & Procurement:</strong> Once you confirm your order, our team sources the exact spirit from trusted partner suppliers or licensed distributors within 24–48 hours.</li>
+            <li><i class="fas fa-check-circle"></i> <strong>Delivery timeline:</strong> Total delivery time ranges between <strong class="highlight-gold">1 to 24 hours</strong> depending on your location and product rarity. </li>
+            <li><i class="fas fa-check-circle"></i> <strong>Shipping charges:</strong> A flat rate of Ksh 450 for orders under Ksh 8,000; free express delivery on orders above Ksh 12,000. For remote areas, we’ll contact you with real-time options.</li>
+            <li><i class="fas fa-check-circle"></i> <strong>Tracking:</strong> After procurement, you receive a unique tracking link and direct WhatsApp updates from our logistics partner.</li>
+            <li><i class="fas fa-check-circle"></i> <strong>Packaging:</strong> All bottles are professionally cushioned, sealed, and discreetly packed to preserve integrity and elegance.</li>
+        </ul>
+
+        <div class="divider-gold"></div>
+
+        <h3 class="policy-subtitle"><i class="fas fa-store me-2"></i> Important note (no stock-holding model)</h3>
+        <p class="policy-text">
+            Because Kileo does not pre-stock products, we kindly ask for your understanding that <strong class="highlight-gold">cancellation or modification requests</strong> must be submitted within <strong>12 hours</strong> of order placement.
+            After that period, the sourcing process begins and we may have already committed to acquiring your selected spirits from our supply network.
+            However, we always strive to accommodate changes whenever possible — simply reach out to our customer care.
+        </p>
+        <div class="alert alert-dark border border-warning bg-transparent text-light-50 mt-3" style="background: #1a1a1a; border-left: 4px solid var(--kileo-gold);">
+            <i class="fas fa-info-circle text-warning me-2"></i> <strong>Same-day sourcing guarantee:</strong> Orders placed before 2 PM EAT are sourced the same business day, accelerating your delivery experience.
+        </div>
+    </div>
+
+    <!-- ========== REFUND & RETURN POLICY CARD ========== -->
+    <div class="policy-card">
+        <div class="policy-icon">
+            <i class="fas fa-rotate-left"></i>
+        </div>
+        <h2 class="policy-title">Refund & Return Policy</h2>
+        <p class="policy-text">
+            As a <strong class="highlight-gold">made-to-order bridge between you and premium spirit suppliers</strong>, Kileo maintains a fair, transparent refund policy that respects both our customers and partner merchants.
+            We do not accept change-of-mind returns due to the bespoke nature of procurement, but we fully protect you against valid concerns.
+        </p>
+
+        <div class="divider-gold"></div>
+
+        <h3 class="policy-subtitle"><i class="fas fa-clipboard-list me-2"></i> Eligible refund scenarios</h3>
+        <ul class="policy-list">
+            <li><i class="fas fa-check-circle text-success"></i> <strong>Damaged or defective product:</strong> If your bottle arrives broken, leaking, corked, or compromised, we offer a <strong>full replacement or 100% refund</strong> (including shipping). Please provide photo/video evidence within 48 hours of delivery.</li>
+            <li><i class="fas fa-check-circle text-success"></i> <strong>Wrong item delivered:</strong> In the rare event you receive a different spirit than ordered, we will either arrange a pickup and send the correct bottle or issue a full refund immediately.</li>
+            <li><i class="fas fa-check-circle text-success"></i> <strong>Supplier unavailability:</strong> If after sourcing attempts (max 3 business days) the exact product is unavailable from all our verified partners, we notify you and offer a complete refund or alternative product at a discounted price.</li>
+        </ul>
+
+        <div class="divider-gold"></div>
+
+        <h3 class="policy-subtitle"><i class="fas fa-hand-peace me-2"></i> Non-refundable situations</h3>
+        <ul class="policy-list">
+            <li><i class="fas fa-times-circle text-danger"></i> Change of mind after sourcing has commenced (past the 12-hour window).</li>
+            <li><i class="fas fa-times-circle text-danger"></i> Delays caused by courier force majeure or incorrect address provided by customer.</li>
+            <li><i class="fas fa-times-circle text-danger"></i> Taste preferences — we encourage you to research spirit profiles; however, we guarantee bottle authenticity.</li>
+        </ul>
+
+        <div class="divider-gold"></div>
+
+        <h3 class="policy-subtitle"><i class="fas fa-credit-card me-2"></i> Refund process & timeline</h3>
+        <p class="policy-text">
+            To request a refund or return, email <strong class="highlight-gold">care@kileo.com</strong> or call <strong class="highlight-gold">+254 742 496 307</strong> with your order number and evidence.
+            Once approved, refunds are processed within <strong>5–7 business days</strong> via the original payment method (M-Pesa, bank transfer, or card).
+            For product returns due to our error, we schedule a free pickup from your address.
+        </p>
+        <div class="mt-3 p-3 rounded-4" style="background: rgba(212,175,55,0.05); border: 1px dashed rgba(212,175,55,0.3);">
+            <i class="fas fa-gem me-2" style="color: var(--kileo-gold);"></i> <strong>Our promise:</strong> Because we purchase drinks on your behalf, we act as your personal buying concierge — we resolve any supplier-related issues directly so you never carry the burden.
+        </div>
+    </div>
+
+    <!-- additional note: customer support + contact consistency -->
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-10 text-center">
+            <div class="py-3 px-4 rounded-4 d-inline-flex flex-wrap gap-3 justify-content-center" style="background: #0f0f0f; border: 1px solid #2a2a2a;">
+                <span><i class="fas fa-headset text-warning"></i> 24/7 support chat</span>
+                <span><i class="fas fa-envelope text-warning"></i> concierge@kileo.com</span>
+                <span><i class="fab fa-whatsapp text-warning"></i> +254 742 496 307</span>
+            </div>
+            <p class="mt-4 small text-secondary">Kileo acts as an intermediary — we source & deliver authentic premium spirits based on customer orders, ensuring zero stock wastage and maximum freshness.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ================= MODERN FOOTER ================= -->
+<footer class="modern-footer">
+    <div class="container">
+        <i class="fas fa-wine-bottle me-2"></i> KILEO PREMIUM SPIRITS <i class="fas fa-wine-bottle ms-2"></i><br>
+        <span class="small">© 2026 · aged to perfection · curated sourcing · <span style="color:#b59440;">+254 742 496 307</span></span>
+    </div>
+</footer>
+
+<!-- minimal script for dynamic active link / demo / fallback behavior & phone chip -->
+<script>
+    (function() {
+        // ensure contact chip click reveals number (enhancement)
+        const chip = document.querySelector('.contact-chip');
+        if(chip) {
+            chip.addEventListener('click', function(e) {
+                const hiddenSpan = chip.querySelector('.hidden-number');
+                hiddenSpan.style.opacity = '1';
+                hiddenSpan.style.maxWidth = '160px';
+                hiddenSpan.style.marginLeft = '6px';
+                setTimeout(() => {
+                    // keep visible on hover, fine
+                }, 2500);
+            });
+        }
+
+        // For consistent linking: if the shop page is within same origin, but this file is policy.html
+        // Ensure that index.html exists or we simulate redirect to the main page. If main page file is index.html, use that.
+        // For preview, link points to "index.html" and "policy.html" - safe.
+        // If needed, we also support fallback to same page but not needed.
+        const shopLink = document.getElementById('shopLink');
+        if(shopLink && window.location.pathname.includes('policy')) {
+            shopLink.setAttribute('href', 'index.html');
+        }
+        // If the original shop page doesn't exist in this environment, but we want to keep consistency:
+        // No further action needed. All policy content is self-contained.
+
+        // Also add little fade-in effect to policy cards
+        const cards = document.querySelectorAll('.policy-card');
+        cards.forEach((card, idx) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(15px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.4s ease';
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, idx * 100);
+        });
+    })();
+</script>
+
+<!-- additional inline for any residual styling -->
+<style>
+    .text-light-50 {
+        color: #ececec;
+    }
+    .alert {
+        border-radius: 28px;
+    }
+    .badge-policy {
+        display: inline-block;
+    }
+    .nav-link-custom.nav-link-active {
+        background: rgba(212, 175, 55, 0.2);
+        color: var(--kileo-gold) !important;
+        border-bottom: 1px solid var(--kileo-gold);
+    }
+    a, .nav-link-custom { text-decoration: none; }
+    .back-shop-btn i {
+        transition: transform 0.2s;
+    }
+    .back-shop-btn:hover i {
+        transform: translateX(-4px);
+    }
+</style>
+
+<!-- additional dummy script to ensure that even if someone lands here from the original product page, the policy is fully displayed -->
+</body>
+</html>
