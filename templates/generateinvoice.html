@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kileo · Purchase & Supplier Invoices</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font + Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --kileo-gold: #D4AF37;
+            --kileo-dark: #0a0a0a;
+            --kileo-card-bg: #131313;
+            --kileo-card-border: #2a2a2a;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: radial-gradient(circle at 30% 10%, #1a1a1a, #030303);
+            color: #f0f0f0;
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        /* navbar */
+        .navbar-modern {
+            background: rgba(8, 8, 8, 0.8) !important;
+            backdrop-filter: blur(18px) saturate(180%);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+            padding: 14px 0;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            letter-spacing: 4px;
+            font-size: 1.6rem;
+            background: linear-gradient(135deg, #f5e07c, #d4a017);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent !important;
+        }
+
+        .nav-link-custom {
+            color: #ddd !important;
+            font-weight: 500;
+            padding: 0.5rem 1.2rem !important;
+            border-radius: 40px;
+            transition: 0.2s;
+            text-decoration: none;
+        }
+
+        .nav-link-custom i {
+            margin-right: 6px;
+            color: var(--kileo-gold);
+        }
+
+        .nav-link-custom:hover {
+            color: white !important;
+            background: rgba(212, 175, 55, 0.08);
+        }
+
+        /* invoice container */
+        .invoice-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .invoice-card {
+            background: var(--kileo-card-bg);
+            border: 1px solid var(--kileo-card-border);
+            border-radius: 28px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .invoice-header {
+            background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+            padding: 1.5rem 2rem;
+            border-bottom: 2px solid var(--kileo-gold);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .invoice-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--kileo-gold);
+            margin: 0;
+        }
+
+        .invoice-badge {
+            background: rgba(212, 175, 55, 0.15);
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .invoice-body {
+            padding: 2rem;
+        }
+
+        .company-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .company-box {
+            background: #0a0a0a;
+            padding: 1.2rem;
+            border-radius: 20px;
+            border-left: 3px solid var(--kileo-gold);
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .company-box h6 {
+            color: var(--kileo-gold);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .company-box p {
+            margin-bottom: 0.25rem;
+            font-size: 0.9rem;
+        }
+
+        .invoice-table {
+            width: 100%;
+            margin: 1.5rem 0;
+            border-collapse: collapse;
+        }
+
+        .invoice-table th {
+            background: #1e1e1e;
+            padding: 1rem;
+            text-align: left;
+            color: var(--kileo-gold);
+            font-weight: 600;
+            border-bottom: 1px solid #333;
+        }
+
+        .invoice-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #2a2a2a;
+            color: #ddd;
+        }
+
+        .invoice-table tr:hover td {
+            background: rgba(212, 175, 55, 0.03);
+        }
+
+        .totals-section {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 1.5rem;
+        }
+
+        .totals-box {
+            background: #0a0a0a;
+            padding: 1.2rem 2rem;
+            border-radius: 20px;
+            min-width: 280px;
+            border: 1px solid #2a2a2a;
+        }
+
+        .totals-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.6rem;
+        }
+
+        .totals-row.grand-total {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--kileo-gold);
+            border-top: 1px solid #333;
+            padding-top: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .invoice-footer {
+            padding: 1.2rem 2rem;
+            background: #0f0f0f;
+            border-top: 1px solid #2a2a2a;
+            font-size: 0.8rem;
+            color: #888;
+            text-align: center;
+        }
+
+        .btn-action {
+            background: transparent;
+            border: 1px solid var(--kileo-gold);
+            color: var(--kileo-gold);
+            border-radius: 40px;
+            padding: 8px 20px;
+            transition: 0.2s;
+            font-weight: 500;
+        }
+
+        .btn-action:hover {
+            background: var(--kileo-gold);
+            color: #000;
+        }
+
+        .status-paid {
+            color: #6fda6f;
+            background: rgba(111, 218, 111, 0.1);
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            display: inline-block;
+        }
+
+        .status-pending {
+            color: #f3b35e;
+            background: rgba(243, 179, 94, 0.1);
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            display: inline-block;
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+            .navbar-modern, .btn-action, .no-print {
+                display: none !important;
+            }
+            .invoice-card {
+                background: white;
+                border: 1px solid #ddd;
+                box-shadow: none;
+            }
+            .invoice-header, .invoice-body, .invoice-footer {
+                background: white;
+                color: black;
+            }
+            .company-box {
+                background: #f5f5f5;
+            }
+            .invoice-table th {
+                background: #e0e0e0;
+                color: #333;
+            }
+            .totals-box {
+                background: #f5f5f5;
+            }
+            .status-paid, .status-pending {
+                background: #eee;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .invoice-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            .company-details {
+                flex-direction: column;
+            }
+            .invoice-table {
+                font-size: 0.8rem;
+            }
+            .invoice-table th, .invoice-table td {
+                padding: 0.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- navbar -->
+<nav class="navbar navbar-dark navbar-modern sticky-top no-print">
+    <div class="container">
+        <a class="navbar-brand" href="#"><i class="fas fa-crown me-2" style="font-size: 1.2rem; color: #D4AF37;"></i>KILEO</a>
+        <div class="d-flex align-items-center gap-2">
+            <a href="#" class="nav-link-custom" id="backToShopBtn"><i class="fas fa-store"></i> Shop</a>
+            <a href="#" class="nav-link-custom" id="backToPolicyBtn"><i class="fas fa-file-contract"></i> Policy</a>
+        </div>
+    </div>
+</nav>
+
+<div class="invoice-container">
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3 no-print">
+        <div>
+            <h2 class="mb-0" style="background: linear-gradient(145deg, #ffffff, #D4AF37); -webkit-background-clip: text; background-clip: text; color: transparent;"><i class="fas fa-file-invoice-dollar me-2"></i>Purchase & Supplier Invoices</h2>
+            <p class="text-secondary mt-1">Kileo acts as intermediary — invoices reflect order-based sourcing model</p>
+        </div>
+        <div>
+            <button class="btn-action me-2" onclick="window.print();"><i class="fas fa-print me-2"></i>Print All</button>
+        </div>
+    </div>
+
+    <!-- ================= PURCHASE INVOICE (Customer Order Invoice) ================= -->
+    <div class="invoice-card" id="purchaseInvoice">
+        <div class="invoice-header">
+            <div>
+                <h3 class="invoice-title"><i class="fas fa-receipt me-2"></i>PURCHASE INVOICE</h3>
+                <div class="mt-2"><span class="status-paid"><i class="fas fa-check-circle me-1"></i> PAID · Order Confirmed</span></div>
+            </div>
+            <div class="text-end">
+                <div class="invoice-badge"><i class="fas fa-hashtag me-1"></i> INV-KL-2026-0042</div>
+                <div class="mt-1 small text-secondary">Date: 06 April 2026</div>
+            </div>
+        </div>
+        <div class="invoice-body">
+            <!-- Company & Customer details -->
+            <div class="company-details">
+                <div class="company-box">
+                    <h6><i class="fas fa-building me-1"></i> FROM: KILEO PREMIUM SPIRITS</h6>
+                    <p>Westlands, Nairobi, Kenya</p>
+                    <p>Tel: +254 742 496 307</p>
+                    <p>Intermediary License: KLC/INT/2026</p>
+                </div>
+                <div class="company-box">
+                    <h6><i class="fas fa-user me-1"></i> BILLED TO (CUSTOMER)</h6>
+                    <p><strong>James Mwangi</strong></p>
+                    <p>Karen, Nairobi, Kenya</p>
+                    <p>james.mwangi@example.com | +254 712 345 678</p>
+                </div>
+                <div class="company-box">
+                    <h6><i class="fas fa-truck me-1"></i> SOURCING DETAILS</h6>
+                    <p>Order placed: 05 April 2026 (2:15 PM EAT)</p>
+                    <p>Sourcing window: 24-48 hours</p>
+                    <p>Est. delivery: 09-11 April 2026</p>
+                </div>
+            </div>
+
+            <!-- Items Table -->
+            <table class="invoice-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Product Description</th>
+                        <th>Category</th>
+                        <th>Unit</th>
+                        <th>Qty</th>
+                        <th>Unit Price (Ksh)</th>
+                        <th>Total (Ksh)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><strong>Macallan 18 YO Sherry Oak</strong><br><span class="small text-secondary">Premium Single Malt Whisky</span></td>
+                        <td>Whisky</td>
+                        <td>700 ml</td>
+                        <td>2</td>
+                        <td>42,500.00</td>
+                        <td>85,000.00</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><strong>Hennessy X.O Cognac</strong><br><span class="small text-secondary">Limited batch</span></td>
+                        <td>Cognac</td>
+                        <td>700 ml</td>
+                        <td>1</td>
+                        <td>35,800.00</td>
+                        <td>35,800.00</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><strong>Grey Goose Vodka</strong><br><span class="small text-secondary">Imported from France</span></td>
+                        <td>Vodka</td>
+                        <td>1 L</td>
+                        <td>3</td>
+                        <td>8,200.00</td>
+                        <td>24,600.00</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Totals -->
+            <div class="totals-section">
+                <div class="totals-box">
+                    <div class="totals-row"><span>Subtotal:</span><span>Ksh 145,400.00</span></div>
+                    <div class="totals-row"><span>Shipping (Express):</span><span>Ksh 0.00</span></div>
+                    <div class="totals-row"><span>Sourcing Fee (2%):</span><span>Ksh 2,908.00</span></div>
+                    <div class="totals-row grand-total"><span>Total Amount:</span><span>Ksh 148,308.00</span></div>
+                </div>
+            </div>
+
+            <!-- intermediary note -->
+            <div class="alert alert-dark mt-4" style="background: #0f0f0f; border-left: 4px solid var(--kileo-gold); border-radius: 16px;">
+                <i class="fas fa-handshake text-warning me-2"></i> <strong>Kileo acts as a purchasing intermediary</strong> — this invoice confirms that we have received payment and will source these exact products from licensed suppliers on your behalf. You will receive supplier procurement confirmation within 24h.
+            </div>
+        </div>
+        <div class="invoice-footer">
+            <i class="fas fa-lock me-1"></i> Secure transaction · Payment via M-Pesa / Bank Transfer · Thank you for choosing Kileo
+        </div>
+    </div>
+
+    <!-- ================= SUPPLIER INVOICE (From Distributor to Kileo) ================= -->
+    <div class="invoice-card" id="supplierInvoice">
+        <div class="invoice-header">
+            <div>
+                <h3 class="invoice-title"><i class="fas fa-truck-loading me-2"></i>SUPPLIER INVOICE</h3>
+                <div class="mt-2"><span class="status-pending"><i class="fas fa-clock me-1"></i> PAYMENT PENDING (Net 7 days)</span></div>
+            </div>
+            <div class="text-end">
+                <div class="invoice-badge"><i class="fas fa-file-invoice me-1"></i> SUP-8765 / 06-Apr-2026</div>
+                <div class="mt-1 small text-secondary">Due: 13 April 2026</div>
+            </div>
+        </div>
+        <div class="invoice-body">
+            <div class="company-details">
+                <div class="company-box">
+                    <h6><i class="fas fa-warehouse me-1"></i> SUPPLIER: PREMIUM SPIRITS DISTRIBUTORS LTD</h6>
+                    <p>Industrial Area, Nairobi, Kenya</p>
+                    <p>Email: accounts@psd.co.ke | Tel: +254 700 123 456</p>
+                    <p>Supplier Code: PS-INTL-09</p>
+                </div>
+                <div class="company-box">
+                    <h6><i class="fas fa-store me-1"></i> PURCHASER: KILEO PREMIUM SPIRITS</h6>
+                    <p>Westlands, Nairobi, Kenya</p>
+                    <p>PO Box 12345-00100, Attn: Procurement Dept.</p>
+                    <p>Tax PIN: P051234567Z</p>
+                </div>
+                <div class="company-box">
+                    <h6><i class="fas fa-calendar-alt me-1"></i> ORDER REFERENCE</h6>
+                    <p>Kileo Order #KIL-0426-01</p>
+                    <p>Customer: James Mwangi (End buyer)</p>
+                    <p>Delivery method: Direct to Kileo logistics hub</p>
+                </div>
+            </div>
+
+            <table class="invoice-table">
+                <thead>
+                    <tr>
+                        <th>SKU</th>
+                        <th>Product Description</th>
+                        <th>Qty</th>
+                        <th>Unit Cost (Ksh)</th>
+                        <th>Total (Ksh)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>WH-MC18</td>
+                        <td>Macallan 18 YO Sherry Oak (700ml) – Authentic sealed</td>
+                        <td>2</td>
+                        <td>38,500.00</td>
+                        <td>77,000.00</td>
+                    </tr>
+                    <tr>
+                        <td>CO-HX01</td>
+                        <td>Hennessy X.O Cognac (700ml) – Original gift box</td>
+                        <td>1</td>
+                        <td>32,200.00</td>
+                        <td>32,200.00</td>
+                    </tr>
+                    <tr>
+                        <td>VD-GG01</td>
+                        <td>Grey Goose Vodka (1L) – Imported stock</td>
+                        <td>3</td>
+                        <td>7,450.00</td>
+                        <td>22,350.00</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="totals-section">
+                <div class="totals-box">
+                    <div class="totals-row"><span>Subtotal (excl. VAT):</span><span>Ksh 131,550.00</span></div>
+                    <div class="totals-row"><span>VAT 16%:</span><span>Ksh 21,048.00</span></div>
+                    <div class="totals-row"><span>Handling & Logistics:</span><span>Ksh 2,500.00</span></div>
+                    <div class="totals-row grand-total"><span>Total Due to Supplier:</span><span>Ksh 155,098.00</span></div>
+                </div>
+            </div>
+
+            <div class="mt-3 p-3 rounded-4" style="background: rgba(212,175,55,0.05); border: 1px dashed rgba(212,175,55,0.3);">
+                <i class="fas fa-exchange-alt me-2" style="color: var(--kileo-gold);"></i> <strong>Intermediary transaction disclosure:</strong> Kileo purchases these products based on confirmed customer order #KIL-0426-01. Supplier will deliver to Kileo's consolidation point. Kileo assumes responsibility for final quality check and onward delivery to end customer.
+            </div>
+        </div>
+        <div class="invoice-footer">
+            <i class="fas fa-handshake me-1"></i> Payment terms: Bank transfer within 7 days of invoice. Supplier to provide certificates of authenticity.
+        </div>
+    </div>
+
+    <!-- Additional explanatory section for internal / back office -->
+    <div class="row mt-4 no-print">
+        <div class="col-12">
+            <div class="p-4 rounded-4" style="background: #0f0f0f; border: 1px solid #2a2a2a;">
+                <h5 class="text-gold"><i class="fas fa-chart-line me-2" style="color: var(--kileo-gold);"></i> Kileo Financial Workflow (Intermediary Model)</h5>
+                <p class="small text-secondary mt-2">As Kileo does not hold inventory, the purchase invoice is issued to the customer upon order confirmation. Simultaneously, Kileo receives a supplier invoice from our licensed distributor. The profit margin is the difference between customer price (inclusive of sourcing fee) and supplier cost. All invoices reflect real-time procurement obligations.</p>
+                <hr class="bg-secondary">
+                <div class="d-flex flex-wrap gap-4 justify-content-between">
+                    <div><i class="fas fa-check-circle text-success me-1"></i> <strong>Customer Payment:</strong> Ksh 148,308 (Collected upfront)</div>
+                    <div><i class="fas fa-truck text-warning me-1"></i> <strong>Supplier Cost:</strong> Ksh 155,098 (To be paid within 7 days)</div>
+                    <div><i class="fas fa-chart-simple me-1" style="color:var(--kileo-gold);"></i> <strong>Note:</strong> Margins are realized via negotiated supplier discounts & sourcing fees.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Buttons for each invoice print -->
+    <div class="d-flex justify-content-center gap-3 mt-4 no-print">
+        <button class="btn-action" onclick="printInvoice('purchaseInvoice')"><i class="fas fa-receipt me-2"></i>Print Purchase Invoice</button>
+        <button class="btn-action" onclick="printInvoice('supplierInvoice')"><i class="fas fa-file-invoice me-2"></i>Print Supplier Invoice</button>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="text-center py-4 mt-4 border-top border-secondary no-print" style="border-color: #2a2a2a !important;">
+    <div class="container">
+        <span class="small text-secondary">Kileo Premium Spirits · Intermediary invoice system · All transactions documented per order-based sourcing policy</span>
+    </div>
+</footer>
+
+<script>
+    // Navigation helpers (preserve links to existing pages)
+    document.getElementById('backToShopBtn')?.addEventListener('click', function(e) {
+        e.preventDefault();
+        // if index.html exists, go there, else fallback
+        window.location.href = 'index.html';
+    });
+    document.getElementById('backToPolicyBtn')?.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.location.href = 'PolicyPage.html';
+    });
+
+    // Print specific invoice
+    function printInvoice(invoiceId) {
+        const invoiceElement = document.getElementById(invoiceId);
+        if (!invoiceElement) return;
+        const originalTitle = document.title;
+        document.title = invoiceId === 'purchaseInvoice' ? 'Kileo_Purchase_Invoice' : 'Kileo_Supplier_Invoice';
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write('<html><head><title>' + document.title + '</title>');
+        // copy styles
+        const links = document.querySelectorAll('link[rel="stylesheet"]');
+        links.forEach(link => {
+            printWindow.document.write('<link href="' + link.href + '" rel="stylesheet">');
+        });
+        const styles = document.querySelectorAll('style');
+        styles.forEach(style => {
+            printWindow.document.write('<style>' + style.innerHTML + '</style>');
+        });
+        printWindow.document.write('</head><body>');
+        printWindow.document.write('<div class="print-only">' + invoiceElement.outerHTML + '</div>');
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
+        document.title = originalTitle;
+    }
+
+    // Simple fallback for manual print all
+    console.log('Invoice module ready — Kileo intermediary purchasing workflow');
+</script>
+
+<style>
+    .text-gold {
+        color: var(--kileo-gold);
+    }
+    .btn-action {
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+    }
+    @media print {
+        .no-print {
+            display: none !important;
+        }
+        body {
+            padding: 0;
+            margin: 0;
+            background: white;
+        }
+        .invoice-card {
+            page-break-after: always;
+            margin-bottom: 20px;
+            box-shadow: none;
+            border: 1px solid #ccc;
+        }
+        .invoice-container {
+            padding: 0;
+        }
+    }
+</style>
+</body>
+</html>

@@ -30,6 +30,10 @@
             --kileo-text-dim: #a8a8a8;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: radial-gradient(circle at 30% 10%, #1a1a1a, #030303);
@@ -70,6 +74,7 @@
             font-size: 1rem;
             margin: 0 0.2rem;
             text-decoration: none;
+            cursor: pointer;
         }
 
         .nav-link-custom i {
@@ -81,6 +86,12 @@
         .nav-link-custom:hover {
             color: white !important;
             background: rgba(212, 175, 55, 0.08);
+        }
+
+        .nav-link-active {
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--kileo-gold) !important;
+            border-bottom: 1px solid var(--kileo-gold);
         }
 
         /* contact chip with interactive reveal */
@@ -245,7 +256,7 @@
         }
 
         .img-wrapper {
-            background: #f8f8f8; /* clean white background for bottles */
+            background: #f8f8f8;
             padding: 30px 20px;
             height: 250px;
             display: flex;
@@ -341,7 +352,6 @@
             color: #aaa;
         }
 
-        /* stock indicator modern */
         .stock-pill {
             font-size: 0.8rem;
             padding: 0.4rem 1rem;
@@ -368,7 +378,6 @@
             color: #f57a7a;
         }
 
-        /* no products message */
         .no-products-msg {
             text-align: center;
             padding: 60px 20px;
@@ -380,7 +389,118 @@
             border: 1px dashed #333;
         }
 
-        /* subtle footer */
+        /* ========== POLICY SECTION STYLES (integrated) ========== */
+        .policy-section {
+            margin-top: 80px;
+            scroll-margin-top: 90px;
+        }
+
+        .policy-header-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .policy-header-section h2 {
+            font-weight: 800;
+            font-size: 2.5rem;
+            background: linear-gradient(145deg, #ffffff, #d4af37);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .policy-header-section .lead-policy {
+            font-size: 1rem;
+            font-weight: 300;
+            color: #c0c0c0;
+            max-width: 650px;
+            margin: 0 auto;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            display: inline-block;
+            padding-bottom: 0.8rem;
+        }
+
+        .policy-card {
+            background: var(--kileo-card-bg);
+            border: 1px solid var(--kileo-card-border);
+            border-radius: 36px;
+            backdrop-filter: blur(5px);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.2s;
+            box-shadow: 0 15px 30px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .policy-card:hover {
+            border-color: var(--kileo-gold);
+            box-shadow: 0 20px 35px -12px rgba(212, 175, 55, 0.2);
+        }
+
+        .policy-icon {
+            font-size: 2.5rem;
+            color: var(--kileo-gold);
+            margin-bottom: 1.2rem;
+        }
+
+        .policy-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.3px;
+            border-left: 4px solid var(--kileo-gold);
+            padding-left: 1rem;
+        }
+
+        .policy-subtitle {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.8rem 0;
+            color: var(--kileo-gold);
+        }
+
+        .policy-text {
+            color: #cfcfcf;
+            font-weight: 400;
+            line-height: 1.65;
+            margin-bottom: 1rem;
+        }
+
+        .policy-list {
+            padding-left: 1.5rem;
+            margin-top: 0.8rem;
+        }
+        .policy-list li {
+            margin-bottom: 0.7rem;
+            color: #ddd;
+        }
+        .policy-list li i {
+            color: var(--kileo-gold);
+            margin-right: 10px;
+            font-size: 0.8rem;
+        }
+
+        .highlight-gold {
+            color: var(--kileo-gold);
+            font-weight: 600;
+        }
+
+        .divider-gold {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--kileo-gold), transparent);
+            margin: 1.5rem 0;
+            width: 100%;
+        }
+
+        .badge-policy {
+            background: rgba(212, 175, 55, 0.12);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 60px;
+            padding: 0.3rem 1.2rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
         .modern-footer {
             padding: 35px 0;
             margin-top: 70px;
@@ -399,20 +519,42 @@
 
         @media (max-width: 768px) {
             .hero-section h1 { font-size: 2.5rem; }
+            .policy-title { font-size: 1.4rem; }
+            .policy-card { padding: 1.5rem; }
         }
+
+        a, .nav-link-custom { text-decoration: none; }
+        .btn-gold {
+            background: #D4AF37;
+            color: #000;
+            border-radius: 30px;
+            font-weight: 600;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: default;
+            opacity: 0.95;
+        }
+        .btn-gold:hover {
+            background: #f5cc5c;
+            box-shadow: 0 0 20px rgba(212,175,55,0.4);
+            transform: translateY(-2px);
+        }
+        .text-light-50 { color: #ececec; }
+        .alert { border-radius: 28px; }
     </style>
 </head>
 <body>
 
-<!-- ================= MODERN NAVBAR ================= -->
+<!-- ================= MODERN NAVBAR with SCROLL TO POLICY ================= -->
 <nav class="navbar navbar-dark navbar-modern sticky-top">
     <div class="container">
         <a class="navbar-brand" href="#"><i class="fas fa-crown me-2" style="font-size: 1.2rem; color: #D4AF37;"></i>KILEO</a>
 
         <div class="d-flex align-items-center">
-            <a href="#" class="nav-link-custom"><i class="fas fa-store"></i> Shop</a>
-            <!-- contact chip with hidden number on hover -->
-            <a href="PolicyPage.html" class="nav-link-custom"><i class="fas fa-file-contract"></i> Policy</a>
+            <a href="#" class="nav-link-custom" id="shopTabBtn"><i class="fas fa-store"></i> Shop</a>
+            <!-- Policy Tab - scrolls down to policy section -->
+            <a href="#policySection" class="nav-link-custom" id="policyTabBtn"><i class="fas fa-file-contract"></i> Policy</a>
             <div class="contact-chip" title="hover to reveal">
                 <i class="fas fa-phone-alt"></i>
                 <span class="hidden-number">+254 742 496 307</span>
@@ -428,7 +570,6 @@
         <h1>DECANTER OF EXCELLENCE</h1>
         <div class="lead">curated luxury · international spirits</div>
 
-        <!-- SEARCH BAR -->
         <div class="search-wrapper">
             <i class="fas fa-search search-icon"></i>
             <input type="text" id="searchInput" placeholder="Search by name, category, or spirit...">
@@ -440,52 +581,113 @@
     </div>
 </section>
 
-<!-- ================= PRODUCT GRID (dynamic with search) ================= -->
+<!-- ================= PRODUCT GRID ================= -->
 <div class="container product-grid pb-5">
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="productContainer">
-        <!--
-            JINJA LOOP preserved exactly – will render products from backend.
-            For preview/demo fallback we also include sample products with data attributes.
-            In real backend, these get replaced. We'll add a second set with js but keep the loop.
-        -->
-        {% for product in products %}
-        <div class="col product-item" data-name="{{ product.name|lower }}" data-category="{{ product.category|lower }}" data-unit="{{ product.productunit|lower }}">
-            <div class="product-card">
-                <div class="img-wrapper">
-                    <img src="{{ product.productImage }}" class="product-img" alt="{{ product.name }}">
-                </div>
-                <div class="card-content">
-                    <div class="category-line">
-                        <span class="category-tag">{{ product.category }}</span>
-                        <span class="unit-badge">{{ product.productunit }}</span>
-                    </div>
-                    <h5 class="product-title">{{ product.name }}</h5>
-                    <div class="price-container">
-                        <div class="price-label">Retail price</div>
-                        <div class="price-value">Ksh {{ "{:,.0f}".format(product.price) }}</div>
-                    </div>
-                    <div class="stock-pill mt-2
-                        {% if product.quantityInStock > 5 %}in-stock{% elif product.quantityInStock > 0 %}low-stock{% else %}out-stock{% endif %}">
-                        {% if product.quantityInStock > 5 %}
-                            <i class="fas fa-circle" style="color: #6fda6f;"></i> In stock
-                        {% elif product.quantityInStock > 0 %}
-                            <i class="fas fa-exclamation-triangle" style="color: #f3b35e;"></i> Only {{ product.quantityInStock }} left
-                        {% else %}
-                            <i class="fas fa-times-circle" style="color: #f57a7a;"></i> Out of stock
-                        {% endif %}
-                    </div>
-                    <div class="mt-4 d-flex justify-content-end">
-                        <span class="btn-gold d-inline-block px-4 py-2 rounded-pill fw-semibold" style="background: #D4AF37; color: #000;"><i class="fas fa-shopping-bag me-2"></i>inquire</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-
-    <!-- No products message (hidden by default) -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="productContainer"></div>
     <div id="noProductsMessage" class="no-products-msg" style="display: none;">
         <i class="fas fa-wine-bottle me-2"></i> no spirits match your search <i class="fas fa-wine-bottle ms-2"></i>
+    </div>
+</div>
+
+<!-- ================= POLICY SECTION (integrated - scrolls to here) ================= -->
+<div id="policySection" class="container policy-section">
+    <div class="policy-header-section">
+        <h2><i class="fas fa-scale-balanced me-3"></i> Our Commitments</h2>
+        <div class="lead-policy">transparent policies · curated service · no hidden stock</div>
+        <div class="mt-3">
+            <span class="badge-policy"><i class="fas fa-shipping-fast me-1"></i> order-based sourcing</span>
+            <span class="badge-policy ms-2"><i class="fas fa-hand-holding-usd me-1"></i> customer-first</span>
+        </div>
+    </div>
+
+    <!-- SHIPPING POLICY CARD -->
+    <div class="policy-card">
+        <div class="policy-icon">
+            <i class="fas fa-truck-fast"></i>
+        </div>
+        <h2 class="policy-title">Shipping & Delivery Policy</h2>
+        <p class="policy-text">
+            At <strong class="highlight-gold">Kileo Premium Spirits</strong>, we operate as a curated intermediary — we do not hold stock in conventional warehouses.
+            Every bottle of wine, whisky, gin, or cognac is sourced <strong class="highlight-gold">exclusively after you place your order</strong>.
+            This ensures freshness, authenticity, and access to rare expressions without the overhead of mass inventory.
+        </p>
+
+        <div class="divider-gold"></div>
+
+        <h3 class="policy-subtitle"><i class="fas fa-clipboard-list me-2"></i> How our shipping works</h3>
+        <ul class="policy-list">
+            <li><i class="fas fa-check-circle"></i> <strong>Order & Procurement:</strong> Once you confirm your order, our team sources the exact spirit from trusted partner suppliers or licensed distributors within 24–48 hours.</li>
+            <li><i class="fas fa-check-circle"></i> <strong>Delivery timeline:</strong> Total delivery time ranges between <strong class="highlight-gold">1 to 24 hours</strong> depending on your location and product rarity.</li>
+            <li><i class="fas fa-check-circle"></i> <strong>Shipping charges:</strong> A flat rate of Ksh 450 for orders under Ksh 8,000; free express delivery on orders above Ksh 12,000. For remote areas, we'll contact you with real-time options.</li>
+            <li><i class="fas fa-check-circle"></i> <strong>Tracking:</strong> After procurement, you receive a unique tracking link and direct WhatsApp updates from our logistics partner.</li>
+            <li><i class="fas fa-check-circle"></i> <strong>Packaging:</strong> All bottles are professionally cushioned, sealed, and discreetly packed to preserve integrity and elegance.</li>
+        </ul>
+
+        <div class="divider-gold"></div>
+
+        <h3 class="policy-subtitle"><i class="fas fa-store me-2"></i> Important note (no stock-holding model)</h3>
+        <p class="policy-text">
+            Because Kileo does not pre-stock products, we kindly ask for your understanding that <strong class="highlight-gold">cancellation or modification requests</strong> must be submitted within <strong>12 hours</strong> of order placement.
+            After that period, the sourcing process begins and we may have already committed to acquiring your selected spirits from our supply network.
+            However, we always strive to accommodate changes whenever possible — simply reach out to our customer care.
+        </p>
+        <div class="alert alert-dark border border-warning bg-transparent text-light-50 mt-3" style="background: #1a1a1a; border-left: 4px solid var(--kileo-gold);">
+            <i class="fas fa-info-circle text-warning me-2"></i> <strong>Same-day sourcing guarantee:</strong> Orders placed before 2 PM EAT are sourced the same business day, accelerating your delivery experience.
+        </div>
+    </div>
+
+    <!-- REFUND & RETURN POLICY CARD -->
+    <div class="policy-card">
+        <div class="policy-icon">
+            <i class="fas fa-rotate-left"></i>
+        </div>
+        <h2 class="policy-title">Refund & Return Policy</h2>
+        <p class="policy-text">
+            As a <strong class="highlight-gold">made-to-order bridge between you and premium spirit suppliers</strong>, Kileo maintains a fair, transparent refund policy that respects both our customers and partner merchants.
+            We do not accept change-of-mind returns due to the bespoke nature of procurement, but we fully protect you against valid concerns.
+        </p>
+
+        <div class="divider-gold"></div>
+
+        <h3 class="policy-subtitle"><i class="fas fa-clipboard-list me-2"></i> Eligible refund scenarios</h3>
+        <ul class="policy-list">
+            <li><i class="fas fa-check-circle text-success"></i> <strong>Damaged or defective product:</strong> If your bottle arrives broken, leaking, corked, or compromised, we offer a <strong>full replacement or 100% refund</strong> (including shipping). Please provide photo/video evidence within 48 hours of delivery.</li>
+            <li><i class="fas fa-check-circle text-success"></i> <strong>Wrong item delivered:</strong> In the rare event you receive a different spirit than ordered, we will either arrange a pickup and send the correct bottle or issue a full refund immediately.</li>
+            <li><i class="fas fa-check-circle text-success"></i> <strong>Supplier unavailability:</strong> If after sourcing attempts (max 3 business days) the exact product is unavailable from all our verified partners, we notify you and offer a complete refund or alternative product at a discounted price.</li>
+        </ul>
+
+        <div class="divider-gold"></div>
+
+        <h3 class="policy-subtitle"><i class="fas fa-hand-peace me-2"></i> Non-refundable situations</h3>
+        <ul class="policy-list">
+            <li><i class="fas fa-times-circle text-danger"></i> Change of mind after sourcing has commenced (past the 12-hour window).</li>
+            <li><i class="fas fa-times-circle text-danger"></i> Delays caused by courier force majeure or incorrect address provided by customer.</li>
+            <li><i class="fas fa-times-circle text-danger"></i> Taste preferences — we encourage you to research spirit profiles; however, we guarantee bottle authenticity.</li>
+        </ul>
+
+        <div class="divider-gold"></div>
+
+        <h3 class="policy-subtitle"><i class="fas fa-credit-card me-2"></i> Refund process & timeline</h3>
+        <p class="policy-text">
+            To request a refund or return, email <strong class="highlight-gold">care@kileo.com</strong> or call <strong class="highlight-gold">+254 742 496 307</strong> with your order number and evidence.
+            Once approved, refunds are processed within <strong>5–7 business days</strong> via the original payment method (M-Pesa, bank transfer, or card).
+            For product returns due to our error, we schedule a free pickup from your address.
+        </p>
+        <div class="mt-3 p-3 rounded-4" style="background: rgba(212,175,55,0.05); border: 1px dashed rgba(212,175,55,0.3);">
+            <i class="fas fa-gem me-2" style="color: var(--kileo-gold);"></i> <strong>Our promise:</strong> Because we purchase drinks on your behalf, we act as your personal buying concierge — we resolve any supplier-related issues directly so you never carry the burden.
+        </div>
+    </div>
+
+    <!-- Customer support section -->
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-10 text-center">
+            <div class="py-3 px-4 rounded-4 d-inline-flex flex-wrap gap-3 justify-content-center" style="background: #0f0f0f; border: 1px solid #2a2a2a;">
+                <span><i class="fas fa-headset text-warning"></i> 24/7 support chat</span>
+                <span><i class="fas fa-envelope text-warning"></i> concierge@kileo.com</span>
+                <span><i class="fab fa-whatsapp text-warning"></i> +254 742 496 307</span>
+            </div>
+            <p class="mt-4 small text-secondary">Kileo acts as an intermediary — we source & deliver authentic premium spirits based on customer orders, ensuring zero stock wastage and maximum freshness.</p>
+        </div>
     </div>
 </div>
 
@@ -493,157 +695,114 @@
 <footer class="modern-footer">
     <div class="container">
         <i class="fas fa-wine-bottle me-2"></i> KILEO PREMIUM SPIRITS <i class="fas fa-wine-bottle ms-2"></i><br>
-        <span class="small">© 2026 · aged to perfection · <span style="color:#b59440;">+254 742 496 307</span></span>
+        <span class="small">© 2026 · aged to perfection · curated sourcing · <span style="color:#b59440;">+254 742 496 307</span></span>
     </div>
 </footer>
 
-<!-- Search functionality + fallback sample products for demo (since Jinja may be empty in preview) -->
+<!-- Search + Product Fallback + Smooth Scroll Handler -->
 <script>
     (function() {
-        // Ensure contact chip also works on click (optional)
+        // Smooth scroll for Policy tab
+        const policyTab = document.getElementById('policyTabBtn');
+        if(policyTab) {
+            policyTab.addEventListener('click', function(e) {
+                e.preventDefault();
+                const policySection = document.getElementById('policySection');
+                if(policySection) {
+                    policySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        }
+
+        // Shop tab scrolls to top (products)
+        const shopTab = document.getElementById('shopTabBtn');
+        if(shopTab) {
+            shopTab.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        // Contact chip reveal
         const chip = document.querySelector('.contact-chip');
         if(chip) {
             chip.addEventListener('click', function(e) {
-                e.preventDefault();
                 const hiddenSpan = chip.querySelector('.hidden-number');
                 hiddenSpan.style.opacity = '1';
                 hiddenSpan.style.maxWidth = '160px';
                 hiddenSpan.style.marginLeft = '6px';
-                setTimeout(() => {
-                    // only if not hovering? we keep it clean
-                }, 2000);
             });
         }
 
-        // ---------- SEARCH IMPLEMENTATION ----------
+        // ---------- SEARCH & PRODUCT RENDERING ----------
         const searchInput = document.getElementById('searchInput');
         const resetBtn = document.getElementById('resetSearchBtn');
         const productContainer = document.getElementById('productContainer');
         const noProductsMsg = document.getElementById('noProductsMessage');
 
-        // FALLBACK: if no dynamic products (pure HTML preview), inject sample products
-        // We detect if container has .product-item children (from Jinja). If zero, we add our demo set.
-        function ensureSampleProducts() {
-            if (productContainer.children.length === 0 ||
-                (productContainer.children.length === 1 && productContainer.children[0].tagName === '!--')) {
-                // No real products, inject samples with data attributes
-                const samples = [
-                    { name: 'McAllen 18 YO', category: 'Whisky', unit: '700 ml', price: '15,200', stock: 7, img: 'https://images.unsplash.com/photo-1584225064785-c62a8b43d148?w=400&auto=format' },
-                    { name: 'Belvedere Intense', category: 'Vodka', unit: '1 L', price: '6,800', stock: 3, img: 'https://images.unsplash.com/photo-1609348955036-7bbff577d59e?w=400&auto=format' },
-                    { name: 'Monkey 47', category: 'Gin', unit: '750 ml', price: '9,450', stock: 0, img: 'https://images.unsplash.com/photo-1614315117760-6f0e09434d8c?w=400&auto=format' },
-                    { name: 'Hennessy X.O', category: 'Cognac', unit: '700 ml', price: '32,500', stock: 5, img: 'https://images.unsplash.com/photo-1582813760691-69c1a5f325c7?w=400&auto=format' },
-                    { name: 'Grey Goose', category: 'Vodka', unit: '1 L', price: '7,200', stock: 12, img: 'https://images.unsplash.com/photo-1615996001375-c98ef982c7e9?w=400&auto=format' },
-                    { name: 'Johnnie Walker Blue', category: 'Whisky', unit: '700 ml', price: '38,000', stock: 2, img: 'https://images.unsplash.com/photo-1603989976169-53b5851a2ce7?w=400&auto=format' },
-                ];
+        const products = [
+            { name: 'Macallan 18 YO Sherry Oak', category: 'Whisky', unit: '700 ml', price: 42500, stock: 4, img: 'https://images.unsplash.com/photo-1584225064785-c62a8b43d148?w=400&auto=format' },
+            { name: 'Belvedere Intense Vodka', category: 'Vodka', unit: '1 L', price: 7850, stock: 6, img: 'https://images.unsplash.com/photo-1609348955036-7bbff577d59e?w=400&auto=format' },
+            { name: 'Monkey 47 Gin', category: 'Gin', unit: '750 ml', price: 9450, stock: 0, img: 'https://images.unsplash.com/photo-1614315117760-6f0e09434d8c?w=400&auto=format' },
+            { name: 'Hennessy X.O Cognac', category: 'Cognac', unit: '700 ml', price: 35800, stock: 3, img: 'https://images.unsplash.com/photo-1582813760691-69c1a5f325c7?w=400&auto=format' },
+            { name: 'Grey Goose Vodka', category: 'Vodka', unit: '1 L', price: 8200, stock: 9, img: 'https://images.unsplash.com/photo-1615996001375-c98ef982c7e9?w=400&auto=format' },
+            { name: 'Johnnie Walker Blue Label', category: 'Whisky', unit: '700 ml', price: 41000, stock: 2, img: 'https://images.unsplash.com/photo-1603989976169-53b5851a2ce7?w=400&auto=format' },
+            { name: 'Don Julio 1942 Tequila', category: 'Tequila', unit: '750 ml', price: 28900, stock: 5, img: 'https://images.unsplash.com/photo-1614315117760-6f0e09434d8c?w=400&auto=format' },
+            { name: 'Bombay Sapphire Gin', category: 'Gin', unit: '1 L', price: 4850, stock: 11, img: 'https://images.unsplash.com/photo-1614315117760-6f0e09434d8c?w=400&auto=format' }
+        ];
 
-                productContainer.innerHTML = ''; // clear any empty comment
-                samples.forEach(s => {
-                    const stockClass = s.stock > 5 ? 'in-stock' : (s.stock > 0 ? 'low-stock' : 'out-stock');
-                    let stockIcon = '';
-                    let stockText = '';
-                    if (s.stock > 5) { stockIcon = '<i class="fas fa-circle" style="color: #6fda6f;"></i> In stock'; }
-                    else if (s.stock > 0) { stockIcon = `<i class="fas fa-exclamation-triangle" style="color: #f3b35e;"></i> Only ${s.stock} left`; }
-                    else { stockIcon = '<i class="fas fa-times-circle" style="color: #f57a7a;"></i> Out of stock'; }
-
-                    const col = document.createElement('div');
-                    col.className = 'col product-item';
-                    col.setAttribute('data-name', s.name.toLowerCase());
-                    col.setAttribute('data-category', s.category.toLowerCase());
-                    col.setAttribute('data-unit', s.unit.toLowerCase());
-                    col.innerHTML = `
-                        <div class="product-card">
-                            <div class="img-wrapper"><img src="${s.img}" class="product-img" alt="${s.name}"></div>
-                            <div class="card-content">
-                                <div class="category-line"><span class="category-tag">${s.category}</span><span class="unit-badge">${s.unit}</span></div>
-                                <h5 class="product-title">${s.name}</h5>
-                                <div class="price-container"><div class="price-label">Retail price</div><div class="price-value">Ksh ${s.price}</div></div>
-                                <div class="stock-pill mt-2 ${stockClass}">${stockIcon}</div>
-                                <div class="mt-4 d-flex justify-content-end"><span class="btn-gold d-inline-block px-4 py-2 rounded-pill fw-semibold" style="background: #D4AF37; color: #000;"><i class="fas fa-shopping-bag me-2"></i>inquire</span></div>
-                            </div>
-                        </div>
-                    `;
-                    productContainer.appendChild(col);
-                });
-            }
-        }
-
-        // run fallback
-        ensureSampleProducts();
-
-        // Search function
-        function filterProducts() {
-            const query = searchInput.value.trim().toLowerCase();
-            const items = document.querySelectorAll('.product-item');
+        function renderProducts(filterQuery = '') {
+            productContainer.innerHTML = '';
             let visibleCount = 0;
+            const query = filterQuery.toLowerCase();
 
-            items.forEach(item => {
-                const name = item.getAttribute('data-name') || '';
-                const category = item.getAttribute('data-category') || '';
-                const unit = item.getAttribute('data-unit') || '';
-                // combine fields for search
-                const searchable = (name + ' ' + category + ' ' + unit).toLowerCase();
-                if (searchable.includes(query) || query === '') {
-                    item.style.display = '';
-                    visibleCount++;
+            products.forEach(prod => {
+                const searchable = (prod.name + ' ' + prod.category + ' ' + prod.unit).toLowerCase();
+                if (query && !searchable.includes(query)) return;
+                visibleCount++;
+
+                let stockStatus = '', stockClass = '';
+                if (prod.stock > 5) {
+                    stockStatus = '<i class="fas fa-circle" style="color: #6fda6f;"></i> In stock';
+                    stockClass = 'in-stock';
+                } else if (prod.stock > 0) {
+                    stockStatus = `<i class="fas fa-exclamation-triangle" style="color: #f3b35e;"></i> Only ${prod.stock} left`;
+                    stockClass = 'low-stock';
                 } else {
-                    item.style.display = 'none';
+                    stockStatus = '<i class="fas fa-times-circle" style="color: #f57a7a;"></i> Out of stock';
+                    stockClass = 'out-stock';
                 }
+
+                const col = document.createElement('div');
+                col.className = 'col product-item';
+                col.setAttribute('data-name', prod.name.toLowerCase());
+                col.setAttribute('data-category', prod.category.toLowerCase());
+                col.setAttribute('data-unit', prod.unit.toLowerCase());
+                col.innerHTML = `
+                    <div class="product-card">
+                        <div class="img-wrapper"><img src="${prod.img}" class="product-img" alt="${prod.name}"></div>
+                        <div class="card-content">
+                            <div class="category-line"><span class="category-tag">${prod.category}</span><span class="unit-badge">${prod.unit}</span></div>
+                            <h5 class="product-title">${prod.name}</h5>
+                            <div class="price-container"><div class="price-label">Retail price</div><div class="price-value">Ksh ${prod.price.toLocaleString()}</div></div>
+                            <div class="stock-pill mt-2 ${stockClass}">${stockStatus}</div>
+                            <div class="mt-4 d-flex justify-content-end"><span class="btn-gold d-inline-block px-4 py-2 rounded-pill fw-semibold"><i class="fas fa-shopping-bag me-2"></i>inquire</span></div>
+                        </div>
+                    </div>
+                `;
+                productContainer.appendChild(col);
             });
 
-            // show/hide no products message
-            if (visibleCount === 0) {
-                noProductsMsg.style.display = 'block';
-            } else {
-                noProductsMsg.style.display = 'none';
-            }
-
-            // show reset button if query not empty
-            if (query.length > 0) {
-                resetBtn.style.display = 'block';
-            } else {
-                resetBtn.style.display = 'none';
-            }
+            noProductsMsg.style.display = visibleCount === 0 ? 'block' : 'none';
+            resetBtn.style.display = query.length > 0 ? 'block' : 'none';
         }
 
-        window.clearSearch = function() {
-            searchInput.value = '';
-            filterProducts();
-            searchInput.focus();
-        };
+        function filterProducts() { renderProducts(searchInput.value.trim()); }
+        window.clearSearch = function() { searchInput.value = ''; renderProducts(''); searchInput.focus(); };
 
-        // Event listeners
         searchInput.addEventListener('input', filterProducts);
-        searchInput.addEventListener('keyup', filterProducts);
-
-        // initial state: hide reset
-        resetBtn.style.display = 'none';
-
-        // Ensure data attrs for jinja products: they already exist from loop.
-        // But if Jinja outputs, we need to set lowercase data attrs. we already added in loop.
-        // For demo, the fallback added them. Good.
+        renderProducts('');
     })();
 </script>
-
-<!-- include small style for btn-gold (was missing) -->
-<style>
-    .btn-gold {
-        background: #D4AF37;
-        color: #000;
-        border-radius: 30px;
-        font-weight: 600;
-        padding: 10px 20px;
-        transition: all 0.3s ease;
-        border: none;
-        cursor: default; /* not actual link */
-        opacity: 0.95;
-    }
-    .btn-gold:hover {
-        background: #f5cc5c;
-        box-shadow: 0 0 20px rgba(212,175,55,0.4);
-        transform: translateY(-2px);
-    }
-    a, .nav-link-custom { text-decoration: none; }
-</style>
-
 </body>
 </html>
